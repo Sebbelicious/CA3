@@ -30,7 +30,7 @@ class Persons extends Component {
   }
 
   amountChange = async (amount) => {
-    this.setState({amount: amount});
+    this.setState({ amount: amount });
     const persons = await dataFacade.getPersons(amount);
     this.setState({ persons: persons });
   }
@@ -40,13 +40,13 @@ class Persons extends Component {
       <div>
         <br />
         <div>
-          <Slider amount={this.state.amount} amountChange={this.amountChange}/>
+          <Slider amount={this.state.amount} amountChange={this.amountChange} />
         </div>
         <div>
           <br />
           <br />
           <div>
-            <AllPersons persons={this.state.persons}/>
+            <AllPersons persons={this.state.persons} />
           </div>
         </div>
       </div>
@@ -59,7 +59,7 @@ class Slider extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { value: 1};
+    this.state = { value: 1 };
   }
 
   handleSubmit = (evt) => {
@@ -69,16 +69,23 @@ class Slider extends React.Component {
 
   render() {
     return (
-      <form className="form" onSubmit={this.handleSubmit}>
-        <InputRange
-          maxValue={87}
-          minValue={0}
-          value={this.state.value}
-          onChange={value => this.setState({ value })} />
-          <br/>
-          <br/>
-        <input type="submit" value="Submit"/>
-      </form>
+      <div>
+        <div>
+          <h2>Choose amount af Star Wars characters to show</h2>
+        </div>
+        <div>
+          <form className="form" onSubmit={this.handleSubmit}>
+            <InputRange
+              maxValue={87}
+              minValue={0}
+              value={this.state.value}
+              onChange={value => this.setState({ value })} />
+            <br />
+            <br />
+            <input type="submit" value="Submit" />
+          </form>
+        </div>
+      </div>
     );
   }
 }
@@ -86,6 +93,7 @@ class Slider extends React.Component {
 function AllPersons(props) {
   return (
     <div>
+      <h2>Characters</h2>
       <table>
         <thead>
           <tr>
