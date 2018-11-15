@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Picker, StyleSheet, FlatList, ScrollView } from 'react-native';
+import { View, Text, Picker, StyleSheet, FlatList } from 'react-native';
 import datafacade from "../DataFacade";
 
 export default class People extends Component {
@@ -12,11 +12,12 @@ export default class People extends Component {
   }
 
   async componentDidMount() {
+    //default amount to show is 5
     this.fetchData(5);
 
   }
 
-  //use this in render to fetch each time the DOM renders
+  //use this in render to fetch each time the DOM changes
   async fetchData(i){
     try {
       const people = await datafacade.getPersons(i);
