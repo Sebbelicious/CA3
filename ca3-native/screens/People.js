@@ -32,7 +32,7 @@ export default class People extends Component {
   }
   render() {
     return (
-      <View style={{ color: "black", backgroundColor: "tomato", flex: 1, alignItems: 'center' }}>
+      <View style={{ color: "black", backgroundColor: "black", flex: 1, alignItems: 'center' }}>
         <Text style={styles.title}>
           How many people do you want to fetch from the database?
           Showing: {this.state.amount}
@@ -56,8 +56,8 @@ export default class People extends Component {
           //to give each item a key
           keyExtractor={(x, i) => i}
           renderItem={({ item }) =>
-            <Text>
-              Name: {item.name}
+            <Text style={styles.title}> 
+               {item.name}
           </Text>}
         />
       </View>

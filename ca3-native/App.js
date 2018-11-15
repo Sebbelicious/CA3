@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Platform, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { Text, View, Platform, TouchableOpacity, StyleSheet } from 'react-native';
 import { Constants } from "expo";
 import { createStackNavigator } from 'react-navigation';
 import People from './screens/People'
@@ -17,13 +17,11 @@ class HomeScreen extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <ScrollView>
         <View style={{ backgroundColor: "black", flex: 1 }} >
-          <Text style={styles.title}>Star Wars Database</Text>
-          <Text style={styles.title}>What do you want to do?</Text>
+          <Text style={styles.title}>Welcome to the Star Wars Database</Text>
+          <Text style={styles.title}>Press the button to search for characters</Text>
           <Touchable onPress={() => navigate('people')} title="Search People" />
         </View>
-      </ScrollView>
     )
   }
 }
@@ -43,7 +41,7 @@ const styles = StyleSheet.create({
     fontSize: 55,
     color: "black",
     textShadowColor: 'rgba(255, 255, 0, 1)',
-    textShadowOffset: { width: -0.5, height: 1 },
+    textShadowOffset: { width: -0.75, height: 0.25 },
     textShadowRadius: 5,
   },
 
