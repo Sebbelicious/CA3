@@ -4,6 +4,8 @@ import dataFacade from './dataFacade';
 import InputRange from 'react-input-range';
 import 'react-input-range/lib/css/index.css';
 import './App.css';
+import BigData from "./components/ClientSidePagination.js";
+
 
 const App = () => (
   <Router>
@@ -11,12 +13,28 @@ const App = () => (
       <Header />
       <Route exact path="/" component={Home} />
       <Route path="/persons" component={Persons} />
+      <Route path="/bigdata" component={BigData} />
       <Route path="/topics" component={Topics} />
     </div>
   </Router>
 )
 
-const Home = () => <h2>Home</h2>
+function Home() {
+  return (
+    <div>
+      <h2>Before you run</h2>
+      <h5>Installing dependencies</h5>
+      <p>
+        Before running you need to do a npm install in the following folders:
+      </p>
+      <ul>
+        <li>CA3-native</li>
+        <li>CA3-react</li>
+      </ul>
+    </div>
+  );
+}
+
 class Persons extends Component {
 
   constructor(props) {
@@ -158,6 +176,9 @@ const Header = () => (
     </li>
     <li>
       <NavLink to="/topics">Topics</NavLink>
+    </li>
+    <li>
+      <NavLink to="/bigdata">Big Data</NavLink>
     </li>
 
   </ul>
