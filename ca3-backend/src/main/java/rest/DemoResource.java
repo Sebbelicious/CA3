@@ -16,8 +16,6 @@ import javax.ws.rs.core.SecurityContext;
 @Path("info")
 public class DemoResource {
 
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-
     @Context
     private UriInfo context;
 
@@ -28,8 +26,7 @@ public class DemoResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("user")
     @RolesAllowed("user")
-    public String getFromUser()
-    {
+    public String getFromUser() {
         String user = securityContext.getUserPrincipal().getName();
         return "\"Hello from USER: " + user + "\"";
     }
@@ -37,18 +34,20 @@ public class DemoResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("sw/{amount}")
-    public String getStarWars(@PathParam("amount") int amount) throws InterruptedException, ExecutionException
-    {
-        StarWarsFuture sw = new StarWarsFuture();
-        return sw.StarWarsFetcher(amount);
+    public String getStarWars(@PathParam("amount") int amount) throws InterruptedException, ExecutionException {
+        try {
+            StarWarsFuture sw = new StarWarsFuture();
+            return sw.StarWarsFetcher(amount);
+        } catch (ExecutionException e) {
+            throw new InterruptedException(e.getMessage());
+        }
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("admin")
     @RolesAllowed("admin")
-    public String getFromAdmin()
-    {
+    public String getFromAdmin() {
         String user = securityContext.getUserPrincipal().getName();
         return "\"Hello from ADMIN" + user + "\"";
     }
