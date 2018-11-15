@@ -13,6 +13,7 @@ const App = () => (
       <Route exact path="/" component={Home} />
       <Route path="/persons" component={Persons} />
       <Route path="/topics" component={Topics} />
+      <Route path="/login" component={LoginApp} />
     </div>
   </Router>
 )
@@ -124,12 +125,6 @@ const Topics = ({ match }) => (
   <div>
     <h2>Topics</h2>
     <ul>
-      {/* <li>
-        <NavLink activeClassName="activeV2" to={`topics/component`}>Components</NavLink>
-      </li>
-      <li>
-        <NavLink activeClassName="activeV2" to={`topics/props-v-state`}>Props v. State</NavLink>
-      </li> */}
       <li>
         <NavLink activeClassName="activeV2" to={`${match.url}/component`}>Components</NavLink>
       </li>
@@ -152,7 +147,7 @@ const Topics = ({ match }) => (
 const Header = () => (
   <ul className="header">
     <li>
-      <NavLink to="/">Home</NavLink>
+      <NavLink exact to="/">Home</NavLink>
     </li>
     <li>
       <NavLink to="/persons">Persons</NavLink>
@@ -160,38 +155,12 @@ const Header = () => (
     <li>
       <NavLink to="/topics">Topics</NavLink>
     </li>
+    <li>
+      <NavLink to="/login">Login</NavLink>
+    </li>
 
   </ul>
 )
 
-// const Index = () => <h2>Home</h2>
-// const About = () => <h2>About</h2>
-// const Users = () => <h2>Users</h2>
-
-// const AppRouter = () => (
-//   <Router>
-//     <div>
-//       <nav>
-//         <ul>
-//           <li>
-//             <Link to="/">Home</Link>
-//           </li>
-//           <li>
-//             <Link to="/about/">About</Link>
-//           </li>
-//           <li>
-//             <Link to="/users/">Users</Link>
-//           </li>
-//         </ul>
-//       </nav>
-
-//       <Route path="/" exact component={Index} />
-//       <Route path="/about/" component={About} />
-//       <Route path="/users/" component={Users} />
-//     </div>
-//   </Router>
-
-// )
 
 export default App;
-// export default AppRouter;
