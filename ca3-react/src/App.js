@@ -12,7 +12,6 @@ const App = () => (
       <Header />
       <Route exact path="/" component={Home} />
       <Route path="/persons" component={Persons} />
-      <Route path="/topics" component={Topics} />
       <Route path="/login" component={LoginApp} />
     </div>
   </Router>
@@ -120,30 +119,6 @@ function AllPersons(props) {
   );
 }
 
-const Topic = ({ match }) => <div className="topic"><h3>Requested Param: {match.params.id}</h3></div>
-const Topics = ({ match }) => (
-  <div>
-    <h2>Topics</h2>
-    <ul>
-      <li>
-        <NavLink activeClassName="activeV2" to={`${match.url}/component`}>Components</NavLink>
-      </li>
-      <li>
-        <NavLink activeClassName="activeV2" to={`${match.url}/props-v-state`}>Props v. State</NavLink>
-      </li>
-    </ul>
-
-    <Route path={`${match.path}/:id`} component={Topic} />
-    <Route
-      exact
-      path={match.path}
-      render={() =>
-        <h3>Please select a topic.</h3>
-      }
-    />
-  </div>
-)
-
 const Header = () => (
   <ul className="header">
     <li>
@@ -151,9 +126,6 @@ const Header = () => (
     </li>
     <li>
       <NavLink to="/persons">Persons</NavLink>
-    </li>
-    <li>
-      <NavLink to="/topics">Topics</NavLink>
     </li>
     <li>
       <NavLink to="/login">Login</NavLink>

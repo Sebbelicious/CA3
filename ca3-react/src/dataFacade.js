@@ -1,4 +1,4 @@
-const URL = "https://7fb97ad9.ngrok.io/swapi/api/info/sw/";
+const URL = "https://7fb97ad9.ngrok.io/swapi/api/";
 const userURL = "https://7fb97ad9.ngrok.io/swapi/api/info/user";
 const adminURL = "https://7fb97ad9.ngrok.io/swapi/api/info/admin";
 
@@ -24,9 +24,9 @@ class DataFacade {
   // In order to use await, a method must be "marked" with async
   async getPersons(amount) {
     if (amount) {
-      return await fetch(URL + amount).then(handleHttpErrors)
+      return await fetch(`${URL}info/sw/${amount}`).then(handleHttpErrors)
     } else {
-      return await fetch(URL + 5).then(handleHttpErrors)
+      return await fetch(`${URL}info/sw/${5}`).then(handleHttpErrors)
     }
 
   }
@@ -61,14 +61,19 @@ class DataFacade {
 
   login = async (user, pass) => {
     const options = this.makeOptions("POST", true, { username: user, password: pass });
-    return await fetch(URL + "/api/login", options, true)
+    return await fetch(URL + "login", options, true)
       .then(handleHttpErrors)
       .then(res => { this.setToken(res.token) })
   }
 
-  fetchData = async () => {
+  fetchDataUser = async () => {
     const options = this.makeOptions("GET", true); //True add's the token
-    return await fetch(URL + "/api/info/user", options).then(handleHttpErrors);
+    return await fetch(URL + "info/user", options).then(handleHttpErrors);
+  }
+
+  fetchDataAdmin = async () => {
+    const options = this.makeOptions("GET", true); //True add's the token
+    return await fetch(URL + "info/admin", options).then(handleHttpErrors);
   }
 
 
