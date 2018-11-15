@@ -20,11 +20,15 @@
 - Run SetupTestUsers, found in the utils package
 - Clean, build and run project
 
+### React Native Expo Link
+- https://expo.io/@emilvhermansen/ca3-native
+
+### React Link
+- https://datboisCA3.surge.sh
+
 ### REST Endpoints
 - To fetch given amount of people
 - https://anderskruse.dk/ca3/api/info/sw/{amount}
-### React Native Expo Link
-- https://expo.io/@emilvhermansen/ca3-native
 
 ### Usernames & Password
 https://anderskruse.dk/ca3/api/login
