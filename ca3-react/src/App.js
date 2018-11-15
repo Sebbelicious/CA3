@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import dataFacade from './dataFacade';
 import InputRange from 'react-input-range';
+import LoginApp from './components/Login'
 import 'react-input-range/lib/css/index.css';
 import './App.css';
 
