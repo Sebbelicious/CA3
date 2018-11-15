@@ -5,7 +5,6 @@ import datafacade from "../DataFacade";
 export default class People extends Component {
   constructor(props) {
     super(props);
-    console.log("in constructor");
     this.state = {
       amount: '',
       persons: [],
@@ -17,11 +16,13 @@ export default class People extends Component {
 
   }
 
+  //use this in render to fetch each time the DOM renders
   async fetchData(i){
     try {
       const people = await datafacade.getPersons(i);
       this.setState({
         persons: people,
+        //update amount state to the amount from picker
         amount: i
       });
     } catch (err) {
@@ -29,7 +30,6 @@ export default class People extends Component {
     }
   }
   render() {
-    const arr = [{ key: 'a', name: "anders" }, { key: 'b', name: "bobby" }]
     return (
       <View style={{ color: "black", backgroundColor: "tomato", flex: 1, alignItems: 'center' }}>
         <Text style={styles.title}>
@@ -38,7 +38,9 @@ export default class People extends Component {
         </Text>
         <Picker
           style={styles.picker}
+          //takes value from picker, updates state
           selectedValue={this.state.amount}
+          //Changes the (value to (amount)) each time the picker value is updated, then calls the fetchdata which updated the amount state
           onValueChange={(amount) => this.fetchData(amount)}>
           <Picker.Item label="5" value="5" />
           <Picker.Item label="6" value="6" />
@@ -50,19 +52,13 @@ export default class People extends Component {
 
         <FlatList
           data={this.state.persons}
+          //to give each item a key
           keyExtractor={(x, i) => i}
           renderItem={({ item }) =>
             <Text>
               Name: {item.name}
           </Text>}
         />
-
-        {/* {this.state.persons.map((person, index) => (
-          <FlatList
-            data={person} 
-            renderItem={({item})=><Text>`${item.name}`</Text> }
-            />
-      ))} */}
       </View>
     );
   }
