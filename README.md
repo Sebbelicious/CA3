@@ -21,11 +21,10 @@
 - Clean, build and run project
 
 ### REST Endpoints
-Replace (url) with your own url
 - To fetch given amount of people
-- (url)/swapi/api/info/sw?amount={amount}
+- https://anderskruse.dk/ca3/api/info/{amount}
 
 ### Usernames & Password
-(url)/swapi/api/login
+https://anderskruse.dk/ca3/api/login
 - Username: admin OR user
 - Password: 1234
