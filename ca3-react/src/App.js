@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import dataFacade from './dataFacade';
 import InputRange from 'react-input-range';
+import LoginApp from './components/Login'
 import 'react-input-range/lib/css/index.css';
 import './App.css';
 import BigData from "./components/ClientSidePagination.js";
@@ -14,7 +15,7 @@ const App = () => (
       <Route exact path="/" component={Home} />
       <Route path="/persons" component={Persons} />
       <Route path="/bigdata" component={BigData} />
-      <Route path="/topics" component={Topics} />
+      <Route path="/login" component={LoginApp} />
     </div>
   </Router>
 )
@@ -136,46 +137,16 @@ function AllPersons(props) {
   );
 }
 
-const Topic = ({ match }) => <div className="topic"><h3>Requested Param: {match.params.id}</h3></div>
-const Topics = ({ match }) => (
-  <div>
-    <h2>Topics</h2>
-    <ul>
-      {/* <li>
-        <NavLink activeClassName="activeV2" to={`topics/component`}>Components</NavLink>
-      </li>
-      <li>
-        <NavLink activeClassName="activeV2" to={`topics/props-v-state`}>Props v. State</NavLink>
-      </li> */}
-      <li>
-        <NavLink activeClassName="activeV2" to={`${match.url}/component`}>Components</NavLink>
-      </li>
-      <li>
-        <NavLink activeClassName="activeV2" to={`${match.url}/props-v-state`}>Props v. State</NavLink>
-      </li>
-    </ul>
-
-    <Route path={`${match.path}/:id`} component={Topic} />
-    <Route
-      exact
-      path={match.path}
-      render={() =>
-        <h3>Please select a topic.</h3>
-      }
-    />
-  </div>
-)
-
 const Header = () => (
   <ul className="header">
     <li>
-      <NavLink to="/">Home</NavLink>
+      <NavLink exact to="/">Home</NavLink>
     </li>
     <li>
       <NavLink to="/persons">Persons</NavLink>
     </li>
     <li>
-      <NavLink to="/topics">Topics</NavLink>
+      <NavLink to="/login">Login</NavLink>
     </li>
     <li>
       <NavLink to="/bigdata">Big Data</NavLink>
@@ -184,34 +155,5 @@ const Header = () => (
   </ul>
 )
 
-// const Index = () => <h2>Home</h2>
-// const About = () => <h2>About</h2>
-// const Users = () => <h2>Users</h2>
-
-// const AppRouter = () => (
-//   <Router>
-//     <div>
-//       <nav>
-//         <ul>
-//           <li>
-//             <Link to="/">Home</Link>
-//           </li>
-//           <li>
-//             <Link to="/about/">About</Link>
-//           </li>
-//           <li>
-//             <Link to="/users/">Users</Link>
-//           </li>
-//         </ul>
-//       </nav>
-
-//       <Route path="/" exact component={Index} />
-//       <Route path="/about/" component={About} />
-//       <Route path="/users/" component={Users} />
-//     </div>
-//   </Router>
-
-// )
 
 export default App;
-// export default AppRouter;
