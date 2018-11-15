@@ -40,7 +40,6 @@ public class LoginEndpoint {
     String username = json.get("username").getAsString();
     String password = json.get("password").getAsString();
 
-    //Todo refactor into facade
     try {
       User user = UserFacade.getInstance().getVeryfiedUser(username, password);
       String token = createToken(username, user.getRolesAsStrings());
