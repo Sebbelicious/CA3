@@ -5,7 +5,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-const URL = "https://7fb97ad9.ngrok.io/swapi/api/info/sw/87"
+const URL = "https://anderskruse.dk/ca3/api/info/sw/87"
 
 
 const columns = [{
@@ -51,7 +51,7 @@ class App extends Component {
                     striped
                     hover
                     bootstrap4
-                    keyField='id'
+                    keyField='name'
                     data={this.state.names}
                     columns={columns}
                     filter={filterFactory()}

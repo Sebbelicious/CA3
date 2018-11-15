@@ -1,4 +1,4 @@
-const URL = "https://anderskruse.dk/swapi/api/";
+const URL = "https://anderskruse.dk/ca3/api/";
 
 //The two methods below, are the utility-methods introduced here (use them if you like):
 //https://docs.google.com/document/d/1hF9P65v_AJKCjol_gFkm3oZ1eVTuOKc15V6pcb3iFa8/edit?usp=sharing 
