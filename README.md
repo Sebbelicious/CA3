@@ -22,7 +22,7 @@
 
 ### REST Endpoints
 - To fetch given amount of people
-- https://anderskruse.dk/ca3/api/info/{amount}
+- https://anderskruse.dk/ca3/api/info/sw/{amount}
 
 ### Usernames & Password
 https://anderskruse.dk/ca3/api/login
