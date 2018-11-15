@@ -23,6 +23,8 @@
 ### REST Endpoints
 - To fetch given amount of people
 - https://anderskruse.dk/ca3/api/info/sw/{amount}
+### React Native Expo Link
+- https://expo.io/@emilvhermansen/ca3-native
 
 ### Usernames & Password
 https://anderskruse.dk/ca3/api/login
