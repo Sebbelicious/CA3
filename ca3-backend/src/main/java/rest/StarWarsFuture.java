@@ -3,6 +3,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entity.StarWarsDTO;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -21,29 +22,30 @@ public class StarWarsFuture {
     private List<StarWarsDTO> personList = new ArrayList();
     private final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
-    public String StarWarsFetcher(int amount) throws InterruptedException, ExecutionException {
+    public String StarWarsFetcher(int amount) throws ExecutionException, InterruptedException, IOException {
         try {
 
             ExecutorService executor = Executors.newFixedThreadPool(5);
             for (int i = 1; i < amount + 1; i++) {
 //            Index 17 in the swapi.io API returns a 404 so we skip it
-            if (i == 17) {
-                i++;
-                amount++;
-            }
+                if (i == 17) {
+                    i++;
+                    amount++;
+                }
                 StarWarsCallable callable = new StarWarsCallable(i);
                 Future<String> future = executor.submit(callable);
                 if (Objects.nonNull(future)) {
                     starWarsFutures.add(future);
                 }
             }
-
+            executor.shutdown();
             for (Future<String> future : starWarsFutures) {
                 personList.add(GSON.fromJson(future.get(), StarWarsDTO.class));
             }
+
             return GSON.toJson(personList);
-        } catch (InterruptedException e) {
-            throw new InterruptedException(e.getMessage());
+        } catch (ExecutionException | InterruptedException e) {
+            throw new IOException(e.getMessage());
         }
     }
 }

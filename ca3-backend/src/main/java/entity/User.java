@@ -19,72 +19,90 @@ import org.mindrot.jbcrypt.BCrypt;
 @Table(name = "users")
 public class User implements Serializable {
 
-  private static final long serialVersionUID = 1L;
-  @Id
-  @Basic(optional = false)
-  @NotNull
-  @Column(name = "user_name", length = 25)
-  private String userName;
-  @Basic(optional = false)
-  @NotNull
-  @Size(min = 1, max = 255)
-  @Column(name = "user_pass")
-  private String userPass;
-  @JoinTable(name = "user_roles", joinColumns = {
-    @JoinColumn(name = "user_name", referencedColumnName = "user_name")}, inverseJoinColumns = {
-    @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
-  @ManyToMany
-  private List<Role> roleList = new ArrayList();
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "user_name", length = 25)
+    private String userName;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "user_pass")
+    private String userPass;
+    @JoinTable(name = "user_roles", joinColumns
+            = {
+                @JoinColumn(name = "user_name", referencedColumnName = "user_name")
+            }, inverseJoinColumns
+            = {
+                @JoinColumn(name = "role_name", referencedColumnName = "role_name")
+            })
+    @ManyToMany
+    private List<Role> roleList = new ArrayList();
 
-  public List<String> getRolesAsStrings() {
-    if (roleList.isEmpty()) {
-      return null;
-    }
-    List<String> rolesAsStrings = new ArrayList();
-    for (Role role : roleList) {
-      rolesAsStrings.add(role.getRoleName());
-    }
-    return rolesAsStrings;
-  }
-
-  public User() {}
-
-  //TODO Change when password is hashed
-   public boolean verifyPassword(String pw){
-        return BCrypt.checkpw(pw, userPass);  
+    public List<String> getRolesAsStrings() {
+        if (roleList.isEmpty()) {
+            return null;
+        }
+        List<String> rolesAsStrings = new ArrayList();
+        for (Role role : roleList) {
+            rolesAsStrings.add(role.getRoleName());
+        }
+        return rolesAsStrings;
     }
 
-  public User(String userName, String userPass) {
-    this.userName = userName;
-    this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt()); //replace with hash & salt
-  }
+    public User() {
+    }
 
-  public String getUserName() {
-    return userName;
-  }
+    //TODO Change when password is hashed
+    public boolean verifyPassword(String pw) {
+        return BCrypt.checkpw(pw, userPass);
+    }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
+    public User(String userName, String userPass) {
+        this.userName = userName;
+        this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt()); //replace with hash & salt
+    }
 
-  public String getUserPass() {
-    return this.userPass;
-  }
+    public String getUserName() {
+        return userName;
+    }
 
-  public void setUserPass(String userPass) {
-    this.userPass = userPass;
-  }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
-  public List<Role> getRoleList() {
-    return roleList;
-  }
+    public String getUserPass() {
+        return this.userPass;
+    }
 
-  public void setRoleList(List<Role> roleList) {
-    this.roleList = roleList;
-  }
+    public void setUserPass(String userPass) {
+        this.userPass = userPass;
+    }
 
-  public void addRole(Role userRole) {
-    roleList.add(userRole);
-  }
+    public List<Role> getRoleList() {
+        return roleList;
+    }
+
+    public List<String> getRoles() {
+        List<String> roles = new ArrayList();
+        for (Role role : roleList) {
+            roles.add(role.toString());
+        }
+        return roles;
+    }
+
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
+    }
+
+    public void addRole(Role userRole) {
+        roleList.add(userRole);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "userName=" + userName + ", userPass=" + userPass + ", roleList=" + roleList + '}';
+    }
 
 }

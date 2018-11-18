@@ -11,11 +11,6 @@ export default class App extends Component {
         this.state = { persons: [], amount: 5 };
     }
 
-    async componentDidMount() {
-        const persons = await dataFacade.getPersons();
-        this.setState({ persons: persons });
-    }
-
     amountChange = async (amount) => {
         this.setState({ amount: amount });
         const persons = await dataFacade.getPersons(amount);
@@ -42,7 +37,7 @@ export default class App extends Component {
 
 
 
-}//CLASS
+}
 
 class Slider extends React.Component {
     constructor(props) {
@@ -66,7 +61,7 @@ class Slider extends React.Component {
                     <form className="form" onSubmit={this.handleSubmit}>
                         <InputRange
                             maxValue={87}
-                            minValue={0}
+                            minValue={1}
                             value={this.state.value}
                             onChange={value => this.setState({ value })} />
                         <br />

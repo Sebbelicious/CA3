@@ -33,10 +33,10 @@ class LoggedIn extends Component {
   }
   componentDidMount() {
     //Instead of writing a component for each login page, we are using the username to see if the user is admin or user
-    if (this.props.user === "user")
-    facade.fetchDataUser().then(res => this.setState({ dataFromServer: res }));
-    if (this.props.user === "admin")
-    facade.fetchDataAdmin().then(res => this.setState({ dataFromServer: res }));
+    if (sessionStorage.getItem('roles').includes('user'))
+      facade.fetchDataUser().then(res => this.setState({ dataFromServer: res }));
+    if (sessionStorage.getItem('roles').includes('admin'))
+      facade.fetchDataAdmin().then(res => this.setState({ dataFromServer: res }));
 
   }
   render() {
@@ -60,7 +60,9 @@ class LoginApp extends Component {
   login = (user, pass) => {
     this.setState({ user })
     facade.login(user, pass)
-      .then(res => this.setState({ loggedIn: true }));
+      .then(res => {
+        this.setState({ loggedIn: true, roles: sessionStorage.getItem('roles') })
+      });
   }
   render() {
     return (

@@ -1,5 +1,5 @@
-const URL = "https://anderskruse.dk/ca3/api/";
-
+import settings from './settings/settings'
+const URL = new settings();
 //The two methods below, are the utility-methods introduced here (use them if you like):
 //https://docs.google.com/document/d/1hF9P65v_AJKCjol_gFkm3oZ1eVTuOKc15V6pcb3iFa8/edit?usp=sharing 
 
@@ -21,30 +21,12 @@ class DataFacade {
 
   // In order to use await, a method must be "marked" with async
   async getPersons(amount) {
-    if (amount) {
-      return await fetch(`${URL}info/sw/${amount}`).then(handleHttpErrors)
-    } else {
-      return await fetch(`${URL}info/sw/${5}`).then(handleHttpErrors)
-    }
-
+    return await fetch(URL.getApiURL(amount)).then(handleHttpErrors)
   }
 
-  async addPerson(person) {
-    return await fetch(URL, this.makeOptions("POST", person)).then(handleHttpErrors);
-  }
-
-  async deletePerson(id) {
-    return await fetch(URL + "/" + id, this.makeOptions("DELETE")).then(handleHttpErrors);
-  }
-
-  async editPerson(person) {
-    console.log(person);
-
-    return await fetch(URL + "/" + person.id, this.makeOptions("POST", person)).then(handleHttpErrors);
-  }
-
-  setToken = (token) => {
+  setTokenAndRole = (token, roles) => {
     localStorage.setItem('jwtToken', token)
+    sessionStorage.setItem('roles', roles)
   }
   getToken = () => {
     return localStorage.getItem('jwtToken')
@@ -55,23 +37,27 @@ class DataFacade {
   }
   logout = () => {
     localStorage.removeItem("jwtToken");
+    sessionStorage.removeItem('roles');
   }
 
   login = async (user, pass) => {
     const options = this.makeOptions("POST", true, { username: user, password: pass });
-    return await fetch(URL + "login", options, true)
+    return await fetch(URL.getLoginURL(), options, true)
       .then(handleHttpErrors)
-      .then(res => { this.setToken(res.token) })
+      .then(res => {
+        console.log(res)
+        this.setTokenAndRole(res.token, res.roles)
+      })
   }
 
   fetchDataUser = async () => {
     const options = this.makeOptions("GET", true); //True add's the token
-    return await fetch(URL + "info/user", options).then(handleHttpErrors);
+    return await fetch(URL.getUserURL(), options).then(handleHttpErrors);
   }
 
   fetchDataAdmin = async () => {
     const options = this.makeOptions("GET", true); //True add's the token
-    return await fetch(URL + "info/admin", options).then(handleHttpErrors);
+    return await fetch(URL.getAdminURL(), options).then(handleHttpErrors);
   }
 
 
