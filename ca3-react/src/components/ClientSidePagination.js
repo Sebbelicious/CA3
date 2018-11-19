@@ -5,7 +5,8 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-const URL = "https://anderskruse.dk/ca3/api/info/sw/87"
+import settings from '../settings/settings'
+const URL = new settings();
 
 
 const columns = [{
@@ -35,7 +36,7 @@ class App extends Component {
     async componentDidMount() {
         console.time("fetching");
         this.setState({ msg: "Loading..." });
-        const names = await fetch(URL).then(res => res.json());
+        const names = await fetch(URL.getAllPersonsURL()).then(res => res.json());
         console.timeEnd("fetching");
         console.time("rendering");
         this.setState({ names, msg: "" });
